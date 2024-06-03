@@ -1,7 +1,10 @@
 #include "register_types.h"
 
+// my nodes
 #include "gdexample.h"
+#include "PlayerController.h"
 
+// godot stuff
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/core/class_db.hpp>
@@ -15,6 +18,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	}
 
 	ClassDB::register_class<GDExample>();
+	ClassDB::register_class<PlayerController>();
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {

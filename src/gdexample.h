@@ -3,9 +3,11 @@
 
 #include <godot_cpp/classes/sprite2d.hpp>
 
-namespace godot {
+namespace godot
+{
 
-	class GDExample : public Sprite2D {
+	class GDExample : public Sprite2D
+	{
 		GDCLASS(GDExample, Sprite2D)
 
 	private:
@@ -22,7 +24,6 @@ namespace godot {
 
 		void set_amplitude(const double p_amplitude);
 		double get_amplitude() const;
-
 
 		void set_speed(const double p_speed);
 		double get_speed() const;

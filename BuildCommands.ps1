@@ -9,3 +9,7 @@ function editor {
     scons platform=windows
     Godot_v4.1.4-stable_win64_console.exe -e --path .\project
 }
+
+function openEditor {
+    Godot_v4.1.4-stable_win64_console.exe -e --path .\project
+}

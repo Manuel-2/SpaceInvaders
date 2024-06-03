@@ -1,20 +1,39 @@
 [gd_scene load_steps=4 format=3 uid="uid://douwn3iut65uf"]
 
 [ext_resource type="Texture2D" uid="uid://jil282o8mipx" path="res://icon.svg" id="1_snws3"]
-[ext_resource type="Script" path="res://Scenes/Player.gd" id="1_ywccf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gsa3g"]
-size = Vector2(126, 126)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1x7l"]
+size = Vector2(114, 117)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_puop8"]
+a = Vector2(0, -650)
+b = Vector2(0, 800)
 
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 33)
 
-[node name="Player" type="CharacterBody2D" parent="."]
-script = ExtResource("1_ywccf")
+[node name="PlayerController" type="PlayerController" parent="."]
+"movement speed" = 260.0
+position = Vector2(0, 271)
+scale = Vector2(0.3, 0.3)
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="Sprite2D" type="Sprite2D" parent="PlayerController"]
 texture = ExtResource("1_snws3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_gsa3g")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController"]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_b1x7l")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(-550, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("SegmentShape2D_puop8")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(550, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("SegmentShape2D_puop8")
