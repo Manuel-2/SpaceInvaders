@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://douwn3iut65uf"]
+[gd_scene load_steps=12 format=3 uid="uid://douwn3iut65uf"]
 
 [ext_resource type="Texture2D" uid="uid://jil282o8mipx" path="res://icon.svg" id="1_snws3"]
-[ext_resource type="Texture2D" uid="uid://ith2on0lb38u" path="res://Assets/Sprites/epic.jpg" id="2_27cfx"]
 
 [sub_resource type="Animation" id="Animation_yt5fb"]
 resource_name = "Idle"
@@ -71,10 +70,6 @@ a = Vector2(0, -650)
 b = Vector2(0, 800)
 
 [node name="Main" type="Node2D"]
-
-[node name="Epic" type="Sprite2D" parent="."]
-position = Vector2(-12, 32)
-texture = ExtResource("2_27cfx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 33)
