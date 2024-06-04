@@ -4,6 +4,7 @@
 #include <godot_cpp/classes/engine.hpp>
 
 #include <godot_cpp/classes/input.hpp>
+#include <godot_cpp/classes/animation_player.hpp>
 
 using namespace godot;
 
@@ -17,8 +18,12 @@ PlayerController::PlayerController() {
 	if(Engine::get_singleton()->is_editor_hint()){
 		set_process_mode(Node::ProcessMode::PROCESS_MODE_DISABLED);
 	}
-
 	movementSpeed = 500;
+}
+
+void PlayerController::_ready(){
+	anim = get_node<AnimationPlayer>("AnimationPlayer");
+	anim->play("Idle");
 }
 
 void PlayerController::_process(double delta){
@@ -29,7 +34,7 @@ void PlayerController::_process(double delta){
 		movementDirection.x = 1;
 	}else if(InputSingleton.is_action_pressed("Left")){
 		movementDirection.x = -1;
-	}
+	}	
 }
 
 void PlayerController::_physics_process(double delta){

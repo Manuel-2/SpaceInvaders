@@ -2,6 +2,7 @@
 #define PLAYERCONTROLLER_H
 
 #include <godot_cpp/classes/character_body2d.hpp>
+#include <godot_cpp/classes/animation_player.hpp>
 
 namespace godot
 {
@@ -13,6 +14,7 @@ namespace godot
 	private:
 		float movementSpeed;
 		Vector2 movementDirection;
+		AnimationPlayer *anim;
 
 	protected:
 		static void _bind_methods();
@@ -20,7 +22,7 @@ namespace godot
 	public:
 		PlayerController();
 		//~PlayerController();
-
+		void _ready();
 		void _process(double delta);
 		void _physics_process(double delta);
 
