@@ -16,8 +16,6 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
-
-	ClassDB::register_class<GDExample>();
 	ClassDB::register_class<PlayerController>();
 }
 
