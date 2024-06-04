@@ -28,14 +28,12 @@ Bullet::Bullet() {
 }
 
 void Bullet::_on_body_entered(Variant body){
-    Node2D *colidedNode = cast_to<Node2D>(body);
-    if(colidedNode->is_class("PlayerController")){
-        PlayerController *player = cast_to<PlayerController>(colidedNode);
+    Node2D *collidedNode = cast_to<Node2D>(body);
+    if(collidedNode->is_class("PlayerController")){
+        PlayerController *player = cast_to<PlayerController>(collidedNode);
         player->takeDamage();
     }else{
-        // todo:
-        // Invader invader = cast_to<Invader>(colidedNode);
-        // invader->takeDamage();
+        collidedNode->queue_free();
     }
 
     // todo: call a particle efect

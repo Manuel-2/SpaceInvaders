@@ -7,6 +7,7 @@
 
 using namespace godot;
 
+// todo: implement a metod to destroy the bullet when it exits the screen
 class Bullet : public Area2D
 {
 GDCLASS(Bullet,Area2D)
