@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://douwn3iut65uf"]
+[gd_scene load_steps=13 format=3 uid="uid://douwn3iut65uf"]
 
 [ext_resource type="Texture2D" uid="uid://jil282o8mipx" path="res://icon.svg" id="1_snws3"]
+[ext_resource type="Texture2D" uid="uid://ith2on0lb38u" path="res://Assets/Sprites/epic.jpg" id="2_27cfx"]
 
 [sub_resource type="Animation" id="Animation_yt5fb"]
 resource_name = "Idle"
@@ -45,39 +46,24 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b1x7l"]
 size = Vector2(114, 117)
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mtf1n"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i5gus"]
 animation = &"Idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fn5qq"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g42dn"]
 animation = &"Moving"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5o65b"]
-advance_mode = 2
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6vn8k"]
 
-[sub_resource type="Curve" id="Curve_ct5l8"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2ad36"]
-xfade_curve = SubResource("Curve_ct5l8")
-advance_mode = 2
-
-[sub_resource type="Curve" id="Curve_7ew7q"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y1png"]
-xfade_curve = SubResource("Curve_7ew7q")
-advance_mode = 2
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rfxgy"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_14oci"]
 states/End/position = Vector2(694, 144)
-states/Idle/node = SubResource("AnimationNodeAnimation_mtf1n")
-states/Idle/position = Vector2(447, 144)
-states/Moving/node = SubResource("AnimationNodeAnimation_fn5qq")
-states/Moving/position = Vector2(447, 270)
-states/Start/position = Vector2(221, 144)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_5o65b"), "Idle", "Moving", SubResource("AnimationNodeStateMachineTransition_2ad36"), "Moving", "Idle", SubResource("AnimationNodeStateMachineTransition_y1png")]
+states/Idle/node = SubResource("AnimationNodeAnimation_i5gus")
+states/Idle/position = Vector2(349, 144)
+states/Moving/node = SubResource("AnimationNodeAnimation_g42dn")
+states/Moving/position = Vector2(349, 249)
+states/Start/position = Vector2(194, 144)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_6vn8k"), "Idle", "Moving", SubResource("AnimationNodeStateMachineTransition_rfxgy")]
 graph_offset = Vector2(-60, 81)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_puop8"]
@@ -85,6 +71,10 @@ a = Vector2(0, -650)
 b = Vector2(0, 800)
 
 [node name="Main" type="Node2D"]
+
+[node name="Epic" type="Sprite2D" parent="."]
+position = Vector2(-12, 32)
+texture = ExtResource("2_27cfx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 33)
@@ -100,6 +90,7 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerController"]
+z_index = 5
 texture = ExtResource("1_snws3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController"]

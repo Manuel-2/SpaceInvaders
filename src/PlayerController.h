@@ -2,7 +2,8 @@
 #define PLAYERCONTROLLER_H
 
 #include <godot_cpp/classes/character_body2d.hpp>
-#include <godot_cpp/classes/animation_player.hpp>
+#include <godot_cpp/classes/animation_tree.hpp>
+#include <godot_cpp/classes/animation_node_state_machine_playback.hpp>
 
 namespace godot
 {
@@ -14,7 +15,8 @@ namespace godot
 	private:
 		float movementSpeed;
 		Vector2 movementDirection;
-		AnimationPlayer *anim;
+		AnimationTree *animTree;
+		AnimationNodeStateMachinePlayback *playback;
 
 	protected:
 		static void _bind_methods();

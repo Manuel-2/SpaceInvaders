@@ -4,7 +4,9 @@
 #include <godot_cpp/classes/engine.hpp>
 
 #include <godot_cpp/classes/input.hpp>
-#include <godot_cpp/classes/animation_player.hpp>
+
+#include <godot_cpp/classes/animation_tree.hpp>
+#include <godot_cpp/classes/animation_node_state_machine_playback.hpp>
 
 using namespace godot;
 
@@ -22,8 +24,9 @@ PlayerController::PlayerController() {
 }
 
 void PlayerController::_ready(){
-	anim = get_node<AnimationPlayer>("AnimationPlayer");
-	anim->play("Idle");
+	animTree = get_node<AnimationTree>("AnimationTree");
+	playback = cast_to<AnimationNodeStateMachinePlayback>(animTree->get("parameters/playback"));
+	playback->travel("Idle");
 }
 
 void PlayerController::_process(double delta){
@@ -32,9 +35,13 @@ void PlayerController::_process(double delta){
 	
 	if(InputSingleton.is_action_pressed("Right")){
 		movementDirection.x = 1;
+		playback->travel("Moving");
 	}else if(InputSingleton.is_action_pressed("Left")){
 		movementDirection.x = -1;
-	}	
+		playback->travel("Moving");
+	}else if(InputSingleton.is_action_just_released("Right") || InputSingleton.is_action_just_released("Left")){
+		playback->travel("Idle");
+	}
 }
 
 void PlayerController::_physics_process(double delta){
