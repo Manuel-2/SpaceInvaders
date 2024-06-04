@@ -49,6 +49,13 @@ void PlayerController::_physics_process(double delta){
 	move_and_slide();
 }
 
+// custom
+void PlayerController::takeDamage(){
+	queue_free();
+}
+
+// getters and setters
+
 void PlayerController::set_movementSpeed(const float p_movementSpeed){
 	movementSpeed = p_movementSpeed;
 }

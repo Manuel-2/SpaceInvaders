@@ -1,8 +1,8 @@
 #include "register_types.h"
 
 // my nodes
-#include "gdexample.h"
 #include "PlayerController.h"
+#include "Bullet.h"
 
 // godot stuff
 #include <gdextension_interface.h>
@@ -17,6 +17,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 		return;
 	}
 	ClassDB::register_class<PlayerController>();
+	ClassDB::register_class<Bullet>();
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {

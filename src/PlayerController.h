@@ -28,6 +28,10 @@ namespace godot
 		void _process(double delta);
 		void _physics_process(double delta);
 
+		// custom
+		void takeDamage();
+
+		// getters and setters
 		void set_movementSpeed(const float p_movementSpeed);
 		float get_movementSpeed() const;
 	};
