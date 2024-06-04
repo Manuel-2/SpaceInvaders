@@ -12,8 +12,8 @@ class Bullet : public Area2D
 GDCLASS(Bullet,Area2D)
 
 private:
-    // 1 is down -1 is up
     float speed;
+    // 1 is down -1 is up
     float yDirection;
 
 protected:
@@ -27,6 +27,11 @@ public:
 
     void _on_body_entered(Variant body);
     //void _on_body_entered(Variant::);
+
+    // 1 goes up, -1 goes down
+    void setDirection(float pYDirection);
+
+    // getters and setters
 
     void set_speed(float p_speed);
     float get_speed();

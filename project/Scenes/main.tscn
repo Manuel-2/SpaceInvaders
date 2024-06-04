@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://douwn3iut65uf"]
+[gd_scene load_steps=17 format=3 uid="uid://douwn3iut65uf"]
 
 [ext_resource type="Texture2D" uid="uid://i3ohfoig2l7v" path="res://Assets/Sprites/Player.png" id="1_6a3uf"]
+[ext_resource type="Texture2D" uid="uid://jil282o8mipx" path="res://icon.svg" id="2_mfe5t"]
 
 [sub_resource type="Animation" id="Animation_yt5fb"]
 resource_name = "Idle"
@@ -83,6 +84,9 @@ size = Vector2(43, 27)
 a = Vector2(0, -650)
 b = Vector2(0, 800)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_foc7v"]
+size = Vector2(8, 16)
+
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -123,4 +127,13 @@ position = Vector2(700, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
 shape = SubResource("SegmentShape2D_puop8")
 
-[node name="Invaders" type="Node" parent="."]
+[node name="Bullet" type="Bullet" parent="."]
+position = Vector2(-330, -374)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet"]
+shape = SubResource("RectangleShape2D_foc7v")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bullet"]
+position = Vector2(-4.76837e-07, 0)
+scale = Vector2(0.0625, 0.125)
+texture = ExtResource("2_mfe5t")

@@ -24,7 +24,7 @@ Bullet::Bullet() {
     connect("body_entered",Callable(this,"_on_body_entered"));
 
     speed = 300;
-    yDirection = 0;
+    yDirection = 1;
 }
 
 void Bullet::_on_body_entered(Variant body){
@@ -37,11 +37,22 @@ void Bullet::_on_body_entered(Variant body){
         // Invader invader = cast_to<Invader>(colidedNode);
         // invader->takeDamage();
     }
+
+    // todo: call a particle efect
+    queue_free();
 }
 
 void Bullet::_process(double delta){
     // updates every frame
-    
+    float y = get_position().y + speed * yDirection * delta;
+    set_position(Vector2(0,y));
+}
+
+// custom --------------------------
+
+// // 1 goes up, -1 goes down
+void setDirection(float pYDirection){
+    pYDirection = pYDirection;
 }
 
 
