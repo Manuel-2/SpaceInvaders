@@ -75,12 +75,12 @@ void InvadersController::moveInvaderInFormation(double delta)
     Vector2 invaderPos = Invader2dNode->get_global_position() + Vector2(speed * direction * delta, 0);
     Invader2dNode->set_global_position(invaderPos);
 
-    lastInvaderMovedInFormation[0]++;
+    lastInvaderMovedInFormation[0] += 1;
 
     // start form the left of the top line
     if(lastInvaderMovedInFormation[0] == 11){
         lastInvaderMovedInFormation[0] = 0;
-        lastInvaderMovedInFormation[1]--;
+        lastInvaderMovedInFormation[1] -= 1;
     }
 
     // restart
@@ -93,9 +93,9 @@ void InvadersController::moveInvaderInFormation(double delta)
 
 void InvadersController::buildFormation()
 {
-    for (int row = 1; row <= 5; ++row)
+    for (int row = 1; row <= 5; row++)
     {
-        for (int column = 1; column <= 12; ++column)
+        for (int column = 1; column <= 12; column++)
         {
             int invaderIndex = 1;
             if (row > 1 && row <= 3)
@@ -116,8 +116,8 @@ void InvadersController::buildFormation()
             add_child(invaderInstance);
         }
     }
-    lastInvaderMovedInFormation[0] = 0;
-    lastInvaderMovedInFormation[1] = 4;
+    // lastInvaderMovedInFormation[0] = 0;
+    // lastInvaderMovedInFormation[1] = 4;
     formationMoveTimer = 0;
 }
 
