@@ -5,6 +5,9 @@
 #include <godot_cpp/classes/animation_tree.hpp>
 #include <godot_cpp/classes/animation_node_state_machine_playback.hpp>
 
+#include <godot_cpp/classes/packed_scene.hpp>
+#include <godot_cpp/classes/ref.hpp>
+
 namespace godot
 {
 
@@ -18,6 +21,8 @@ namespace godot
 		AnimationTree *animTree;
 		AnimationNodeStateMachinePlayback *playback;
 
+		Ref<PackedScene> bulletScene;
+
 	protected:
 		static void _bind_methods();
 
@@ -30,6 +35,7 @@ namespace godot
 
 		// custom
 		void takeDamage();
+		void shootProyectile();
 
 		// getters and setters
 		void set_movementSpeed(const float p_movementSpeed);

@@ -36,21 +36,22 @@ void Bullet::_on_body_entered(Variant body){
         collidedNode->queue_free();
     }
 
-    // todo: call a particle efect
+    // todo: call a particle efect and a sound
     queue_free();
 }
 
 void Bullet::_process(double delta){
     // updates every frame
-    float y = get_position().y + speed * yDirection * delta;
-    set_position(Vector2(0,y));
+    Vector2 newPosition = get_position();
+    newPosition.y = newPosition.y + speed * yDirection * delta;
+    set_position(newPosition);
 }
 
 // custom --------------------------
 
-// // 1 goes up, -1 goes down
-void setDirection(float pYDirection){
-    pYDirection = pYDirection;
+// // -1 goes up, 1 goes down
+void Bullet::setDirection(float pYDirection){
+    yDirection = pYDirection;
 }
 
 
