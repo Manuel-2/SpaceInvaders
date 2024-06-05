@@ -33,6 +33,7 @@ animations = [{
 shape = SubResource("RectangleShape2D_l08il")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 0)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_hs3lw")
 autoplay = "default"

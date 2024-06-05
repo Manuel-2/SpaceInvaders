@@ -3,14 +3,11 @@
 #include <godot_cpp/godot.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/classes/engine.hpp>
-
 #include <godot_cpp/classes/animated_sprite2d.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/node2d.hpp>
 #include <godot_cpp/classes/input.hpp>
-
-#include <vector>
 
 using namespace godot;
 
@@ -34,6 +31,7 @@ InvadersController::InvadersController()
     speed = 50;
     delayBetweenInvaderInFormationMove = 20;
     direction = 0;
+    formationMoveTimer = 0;
 
     invadersScenePaths[0] = "res://Scenes/Invader1.tscn";
     invadersScenePaths[1] = "res://Scenes/Invader2.tscn";
@@ -41,6 +39,15 @@ InvadersController::InvadersController()
 
     lastInvaderMovedInFormation[0] = 0;
     lastInvaderMovedInFormation[1] = 4;
+
+    // Initialize matrix to nullptr
+    for (int i = 0; i < 12; ++i)
+    {
+        for (int j = 0; j < 5; ++j)
+        {
+            invadersAnimatedSpritesMatrix[i][j] = nullptr;
+        }
+    }
 }
 
 void InvadersController::_ready()
@@ -55,10 +62,11 @@ void InvadersController::_process(double delta)
         buildFormation();
         if (formationMoveTimer > delayBetweenInvaderInFormationMove)
         {
-            if(direction == 0){
+            if (direction == 0)
+            {
                 direction = 1;
             }
-            //moveInvaderInFormation(delta);
+            moveInvaderInFormation(delta);
         }
     }
 
@@ -70,21 +78,32 @@ void InvadersController::moveInvaderInFormation(double delta)
     int column = lastInvaderMovedInFormation[0];
     int row = lastInvaderMovedInFormation[1];
 
+    if (invadersAnimatedSpritesMatrix[column][row] == nullptr)
+    {
+        ERR_PRINT("Attempted to move a null invader in formation.");
+        return;
+    }
+
     Node *Invader = invadersAnimatedSpritesMatrix[column][row]->get_parent();
     Node2D *Invader2dNode = Object::cast_to<Node2D>(Invader);
-    Vector2 invaderPos = Invader2dNode->get_global_position() + Vector2(speed * direction * delta, 0);
-    Invader2dNode->set_global_position(invaderPos);
+    if (Invader2dNode)
+    {
+        Vector2 invaderPos = Invader2dNode->get_global_position() + Vector2(speed * direction * delta, 0);
+        Invader2dNode->set_global_position(invaderPos);
+    }
 
     lastInvaderMovedInFormation[0] += 1;
 
-    // start form the left of the top line
-    if(lastInvaderMovedInFormation[0] == 11){
+    // start from the left of the top line
+    if (lastInvaderMovedInFormation[0] == 11)
+    {
         lastInvaderMovedInFormation[0] = 0;
         lastInvaderMovedInFormation[1] -= 1;
     }
 
     // restart
-    if(lastInvaderMovedInFormation[0] == 11 && lastInvaderMovedInFormation[1] == 0){
+    if (lastInvaderMovedInFormation[0] == 11 && lastInvaderMovedInFormation[1] == 0)
+    {
         lastInvaderMovedInFormation[0] = 0;
         lastInvaderMovedInFormation[1] = 4;
     }
@@ -93,48 +112,68 @@ void InvadersController::moveInvaderInFormation(double delta)
 
 void InvadersController::buildFormation()
 {
-    for (int row = 1; row <= 5; row++)
+    for (int row = 0; row < 5; ++row)
     {
-        for (int column = 1; column <= 12; column++)
+        for (int column = 0; column < 11; ++column)
         {
             int invaderIndex = 1;
-            if (row > 1 && row <= 3)
+            if (row >= 1 && row <= 2)
             {
                 invaderIndex = 2;
             }
-            else if (row > 3)
+            else if (row > 2)
             {
                 invaderIndex = 0;
             }
 
             invadersScenes[invaderIndex] = ResourceLoader::get_singleton()->load(invadersScenePaths[invaderIndex]);
+            if (invadersScenes[invaderIndex].is_null())
+            {
+                ERR_PRINT("Failed to load invader scene.");
+                continue;
+            }
+
             Node *invaderInstance = invadersScenes[invaderIndex]->instantiate();
             Node2D *node2dInstanceReference = Object::cast_to<Node2D>(invaderInstance);
+            if (!node2dInstanceReference)
+            {
+                ERR_PRINT("Failed to cast invader instance to Node2D.");
+                continue;
+            }
+
             invadersAnimatedSpritesMatrix[column][row] = node2dInstanceReference->get_node<AnimatedSprite2D>("AnimatedSprite2D");
+            if (!invadersAnimatedSpritesMatrix[column][row])
+            {
+                ERR_PRINT("Failed to get AnimatedSprite2D node.");
+                continue;
+            }
+
+            // Position the invader based on its index
             Vector2 invaderPos = Vector2(column * -80, row * 40);
             node2dInstanceReference->set_position(invaderPos);
             add_child(invaderInstance);
         }
     }
-    // lastInvaderMovedInFormation[0] = 0;
-    // lastInvaderMovedInFormation[1] = 4;
-    formationMoveTimer = 0;
 }
 
-// getters and setters  --------------
+// getters and setters --------------
 
-void InvadersController::set_speed(const float p_speed){
+void InvadersController::set_speed(const float p_speed)
+{
     speed = p_speed;
 }
 
-float InvadersController::get_speed()const{
+float InvadersController::get_speed() const
+{
     return speed;
 }
 
-void InvadersController::set_delayBetweenInvaderInFormationMove( const float p_delayBetweenInvaderInFormationMove){
+void InvadersController::set_delayBetweenInvaderInFormationMove(const float p_delayBetweenInvaderInFormationMove)
+{
     delayBetweenInvaderInFormationMove = p_delayBetweenInvaderInFormationMove;
 }
 
-float InvadersController::get_delayBetweenInvaderInFormationMove() const{
+float InvadersController::get_delayBetweenInvaderInFormationMove() const
+{
     return delayBetweenInvaderInFormationMove;
 }

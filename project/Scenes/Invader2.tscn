@@ -27,7 +27,6 @@ animations = [{
 }]
 
 [node name="Invader2" type="StaticBody2D"]
-position = Vector2(63, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2vikx")
