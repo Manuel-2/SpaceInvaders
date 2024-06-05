@@ -15,10 +15,11 @@ class InvadersController : public Node2D
 
 private:
     float direction;
-    // x or width
-    int formationCollumns = 12;
-    // y or height
-    int formationRows = 5;
+    float speed;
+    float formationMoveTimer;
+    float delayBetweenInvaderInFormationMove;
+    // index 0 is X, index 1 is y
+    int lastInvaderMovedInFormation[2];
 
     //index  0 is left, 1 is right
     RayCast2D *leftRayCast;
@@ -41,13 +42,13 @@ public:
     void _ready();
 
     void buildFormation();
+    void moveInvaderInFormation(double delta);
 
-    void set_formationCollumns(int p_formationCollumns);
-    int get_formationCollumns();
+    void set_speed(const float p_speed);
+    float get_speed()const;
 
-    void set_formationRows(int p_formationRows);
-    int get_formationRows();
-
+    void set_delayBetweenInvaderInFormationMove( const float p_delayBetweenInvaderInFormationMove);
+    float get_delayBetweenInvaderInFormationMove() const;
 };
 
 #endif

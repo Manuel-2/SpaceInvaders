@@ -124,6 +124,7 @@ position = Vector2(700, 0)
 shape = SubResource("SegmentShape2D_puop8")
 
 [node name="InvadersController" type="InvadersController" parent="."]
+"delay between moving one invader and other in sequence" = 500.0
 position = Vector2(520, -433)
 
 [node name="LeftRay" type="RayCast2D" parent="InvadersController"]
