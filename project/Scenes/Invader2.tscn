@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5k7lnvwfscqn"]
+
+[ext_resource type="Texture2D" uid="uid://q3m8f46rva7g" path="res://Assets/Sprites/Invaders.png" id="1_bx2c5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vikx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6erov"]
+atlas = ExtResource("1_bx2c5")
+region = Rect2(0, 8, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8nuw"]
+atlas = ExtResource("1_bx2c5")
+region = Rect2(16, 8, 16, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xmlx7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6erov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8nuw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Invader2" type="StaticBody2D"]
+position = Vector2(63, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2vikx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_xmlx7")
+autoplay = "default"
+frame = 1
+frame_progress = 0.242459

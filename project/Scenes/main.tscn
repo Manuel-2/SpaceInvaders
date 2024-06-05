@@ -122,3 +122,14 @@ position = Vector2(700, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
 shape = SubResource("SegmentShape2D_puop8")
+
+[node name="InvadersController" type="InvadersController" parent="."]
+position = Vector2(520, -433)
+
+[node name="LeftRay" type="RayCast2D" parent="InvadersController"]
+position = Vector2(-300, 0)
+target_position = Vector2(-90, 0)
+
+[node name="RightRay" type="RayCast2D" parent="InvadersController"]
+position = Vector2(300, 0)
+target_position = Vector2(90, 0)

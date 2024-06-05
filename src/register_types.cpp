@@ -3,6 +3,7 @@
 // my nodes
 #include "PlayerController.h"
 #include "Bullet.h"
+#include "InvadersController.h"
 
 // godot stuff
 #include <gdextension_interface.h>
@@ -18,6 +19,8 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 	}
 	ClassDB::register_class<PlayerController>();
 	ClassDB::register_class<Bullet>();
+	ClassDB::register_class<InvadersController>();
+
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {
