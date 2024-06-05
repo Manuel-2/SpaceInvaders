@@ -38,6 +38,9 @@ InvadersController::InvadersController()
     invadersScenePaths[0] = "res://Scenes/Invader1.tscn";
     invadersScenePaths[1] = "res://Scenes/Invader2.tscn";
     invadersScenePaths[2] = "res://Scenes/Invader3.tscn";
+
+    lastInvaderMovedInFormation[0] = 0;
+    lastInvaderMovedInFormation[1] = 4;
 }
 
 void InvadersController::_ready()
@@ -55,7 +58,7 @@ void InvadersController::_process(double delta)
             if(direction == 0){
                 direction = 1;
             }
-            moveInvaderInFormation(delta);
+            //moveInvaderInFormation(delta);
         }
     }
 
