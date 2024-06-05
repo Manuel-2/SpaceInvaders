@@ -74,7 +74,7 @@ void PlayerController::shootProyectile(){
 
 	Vector2 newBulletPosition = Vector2(0.0f,0.0f);
 	// "y" values is negative goin up
-	newBulletPosition.y = get_position().y - 36;
+	newBulletPosition.y = get_position().y - 30;
 	newBulletPosition.x = get_position().x;
 	Bullet *bullet2dNodeInstance = Object::cast_to<Bullet>(instance);
 	bullet2dNodeInstance->set_global_position(newBulletPosition);
