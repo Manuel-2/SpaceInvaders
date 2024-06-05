@@ -62,10 +62,6 @@ void InvadersController::_process(double delta)
         buildFormation();
         if (formationMoveTimer > delayBetweenInvaderInFormationMove)
         {
-            if (direction == 0)
-            {
-                direction = 1;
-            }
             moveInvaderInFormation(delta);
         }
     }
@@ -112,9 +108,9 @@ void InvadersController::moveInvaderInFormation(double delta)
 
 void InvadersController::buildFormation()
 {
-    for (int row = 0; row < 5; ++row)
+    for (int row = 0; row < 5; row++)
     {
-        for (int column = 0; column < 11; ++column)
+        for (int column = 0; column < 12; column++)
         {
             int invaderIndex = 1;
             if (row >= 1 && row <= 2)
